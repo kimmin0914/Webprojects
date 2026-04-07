@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="01.html" method="get">
+    </fieldset>
+    <legend>회원가입</legend>
+    <table>
+        <tr>
+            <td>성명</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>이메일</td>
+            <td><input type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td>주소</td>
+            <td><input type="text" name="addr"></td>
+        </tr>
+        <tr>
+            <td>성별</td>
+            <td>
+                <input type="radio" name="gender" value="male">남성 &nbsp;&nbsp;
+                <input type="radio" name="gender" value="female">여성
+            </td>
+        </tr>
+        <tr>
+            <td>남기고 싶은 말:</td>
+            <td>
+                <textarea name = "message" cols = "30" rows = "5">기타 하고 싶은 말이 있으면 여기에 입력하세요.</textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="가입하기"> &nbsp;&nbsp;
+    <input type="reset" value="입력 초기화">
+</form>
+</body>
+</html>
