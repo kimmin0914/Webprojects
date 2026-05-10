@@ -1320,6 +1320,70 @@
   overflow: hidden;
 }
 
+/* -----------------------------------------------------------   섹션 7: 3D Flip Cards   ----------------------------------------------------------- */.flip-section {  padding: 5rem 1.5rem;}
+.flip-section__inner {  max-width: 72rem;  margin: 0 auto;}
+/* 4열 그리드 */.flip-grid {  display: grid;  grid-template-columns: repeat(4, 1fr);  gap: 1.5rem;}
+@media (max-width: 64rem) {  .flip-grid { grid-template-columns: repeat(2, 1fr); }}
+@media (max-width: 36rem) {  .flip-grid { grid-template-columns: 1fr; }}
+/* 3D 뷰포트 컨테이너 */.flip-card {  perspective: 1000px;  height: 320px;  cursor: pointer;}
+/* 내부 래퍼 — 실제 회전 대상 */.flip-card__inner {  position: relative;  width: 100%;  height: 100%;  transform-style: preserve-3d;  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);}
+/* hover 시 180도 Y축 회전 */.flip-card:hover .flip-card__inner {  transform: rotateY(180deg);}
+/* 앞면 / 뒷면 공통 */.flip-card__face {  position: absolute;  inset: 0;  border-radius: 16px;  padding: 1.75rem 1.5rem;  backface-visibility: hidden;  -webkit-backface-visibility: hidden;  display: flex;  flex-direction: column;  align-items: flex-start;  gap: 0;  overflow: hidden;}
+/* ------ 앞면 (Front) — 붉은 톤 ------ */.flip-card__face--front {  background: #160d0d;  border: 1px solid rgba(239, 68, 68, 0.25);  box-shadow:    inset 0 0 60px rgba(239, 68, 68, 0.05),    0 8px 32px rgba(0, 0, 0, 0.4);}
+/* 앞면 배경 패턴 — 미묘한 그리드 */.flip-card__face--front::before {  content: "";  position: absolute;  inset: 0;  background-image:    linear-gradient(rgba(239, 68, 68, 0.04) 1px, transparent 1px),    linear-gradient(90deg, rgba(239, 68, 68, 0.04) 1px, transparent 1px);  background-size: 24px 24px;  border-radius: 16px;  pointer-events: none;}
+.flip-card__mistake-badge {  font-size: 0.62rem;  font-weight: 800;  letter-spacing: 0.15em;  text-transform: uppercase;  color: #f87171;  background: rgba(239, 68, 68, 0.12);  border: 1px solid rgba(239, 68, 68, 0.3);  padding: 0.2rem 0.6rem;  border-radius: 999px;  margin-bottom: 1.1rem;  position: relative;  z-index: 1;}
+.flip-card__front-icon {  color: rgba(239, 68, 68, 0.7);  margin-bottom: 0.85rem;  position: relative;  z-index: 1;}
+.flip-card__front-title {  font-size: 1.05rem;  font-weight: 700;  color: #fca5a5;  margin-bottom: 0.65rem;  position: relative;  z-index: 1;  line-height: 1.3;}
+.flip-card__front-desc {  font-size: 0.8rem;  color: rgba(239, 68, 68, 0.55);  line-height: 1.7;  position: relative;  z-index: 1;  flex: 1;}
+.flip-card__hint {  margin-top: auto;  font-size: 0.68rem;  color: rgba(239, 68, 68, 0.35);  letter-spacing: 0.05em;  position: relative;  z-index: 1;  display: flex;  align-items: center;  gap: 0.3rem;}
+.flip-card__hint::before {  content: "";  display: inline-block;  width: 16px;  height: 1px;  background: rgba(239, 68, 68, 0.3);}
+/* ------ 뒷면 (Back) — 네온 시안/퍼플 톤 ------ */.flip-card__face--back {  background: #080f1a;  border: 1px solid rgba(6, 182, 212, 0.3);  box-shadow:    inset 0 0 60px rgba(6, 182, 212, 0.05),    0 8px 32px rgba(0, 0, 0, 0.5),    0 0 0 1px rgba(168, 85, 247, 0.08);  transform: rotateY(180deg); /* 뒷면은 처음부터 뒤집힌 상태 */}
+/* 뒷면 네온 그라디언트 테두리 효과 */.flip-card__face--back::before {  content: "";  position: absolute;  inset: -1px;  border-radius: 17px;  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));  z-index: -1;  opacity: 0.25;}
+/* 뒷면 배경 패턴 */.flip-card__face--back::after {  content: "";  position: absolute;  inset: 0;  background:    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(6, 182, 212, 0.07) 0%, transparent 60%);  border-radius: 16px;  pointer-events: none;}
+.flip-card__solution-badge {  font-size: 0.62rem;  font-weight: 800;  letter-spacing: 0.15em;  text-transform: uppercase;  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));  -webkit-background-clip: text;  -webkit-text-fill-color: transparent;  background-clip: text;  border: 1px solid rgba(6, 182, 212, 0.3);  padding: 0.2rem 0.6rem;  border-radius: 999px;  margin-bottom: 1.1rem;  position: relative;  z-index: 1;  /* 그라디언트 텍스트에 배경색 분리 */  background-color: rgba(6, 182, 212, 0.08);}
+.flip-card__back-icon {  color: var(--neon-cyan);  margin-bottom: 0.85rem;  position: relative;  z-index: 1;}
+.flip-card__back-title {  font-size: 1.05rem;  font-weight: 700;  color: var(--text-base);  margin-bottom: 0.65rem;  position: relative;  z-index: 1;  line-height: 1.3;}
+.flip-card__back-desc {  font-size: 0.8rem;  color: var(--text-muted);  line-height: 1.75;  position: relative;  z-index: 1;  flex: 1;}
+.flip-card__code {  margin-top: auto;  display: block;  font-family: "JetBrains Mono", "Fira Code", monospace;  font-size: 0.72rem;  color: var(--neon-cyan);  background: rgba(6, 182, 212, 0.08);  border: 1px solid rgba(6, 182, 212, 0.2);  border-left: 2px solid var(--neon-purple);  padding: 0.35rem 0.65rem;  border-radius: 5px;  position: relative;  z-index: 1;  white-space: nowrap;}
+
+/* =====================================================   섹션 8: 이미지 프롬프트 갤러리 (완전 재구축본)   - inset: 0 절대 미사용   - z-index 3단계 명확 분리   - 클래스 접두사 s8- 로 기존 스타일 충돌 차단   ===================================================== */
+/* --- 섹션 래퍼 --- */.s8-gallery-section {  padding: 5rem 0 0;  overflow: hidden;}
+/* --- 섹션 헤더 --- */.s8-header {  max-width: 72rem;  margin: 0 auto;  padding: 0 1.5rem;  text-align: center;  margin-bottom: 3.5rem;}
+/* =====================================================   아코디언 컨테이너   ===================================================== */.s8-accordion {  display: flex;  flex-direction: row;    /* 가로 배치 */  width: 100%;  height: 500px;          /* 고정 높이 */  gap: 4px;}
+/* =====================================================   각 패널 공통   ===================================================== */.s8-panel {  flex: 1;                /* 기본: 균등 분할 */  min-width: 56px;        /* 접혔을 때 최소 너비 */  position: relative;     /* 자식 absolute의 기준점 */  overflow: hidden;  cursor: pointer;  border-radius: 4px;  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);}
+/* 나머지 패널은 좁아지고 */.s8-accordion:hover .s8-panel {  flex: 0.35;}
+/* 호버된 패널만 넓어짐 */.s8-accordion .s8-panel:hover {  flex: 4;}
+/* =====================================================   레이어 1: 배경 이미지 (z-index: 1)   inset 미사용 — top/left/width/height 명시   ===================================================== */.s8-panel__bg {  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  z-index: 1;             /* 가장 아래 */
+  background-size: cover;  background-position: center;  background-repeat: no-repeat;
+  transform: scale(1.08);  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);}
+.s8-panel:hover .s8-panel__bg {  transform: scale(1);    /* 호버 시 확대 풀림 */}
+/* =====================================================   레이어 2: 그라디언트 오버레이 (z-index: 2)   inset 미사용 — top/left/width/height 명시   이미지가 보이도록 상단은 transparent 유지   ===================================================== */.s8-panel__overlay {  position: absolute;  top: 0;  left: 0;  width: 100%;  height: 100%;  z-index: 2;             /* 이미지 위 */  pointer-events: none;   /* 클릭·hover 이벤트 통과 */
+  /* 하단 어둠 → 상단 완전 투명 */  background: linear-gradient(    to top,    rgba(6, 10, 22, 0.93) 0%,    rgba(6, 10, 22, 0.55) 35%,    rgba(6, 10, 22, 0.15) 60%,    transparent 100%  );  transition: background 0.4s ease;}
+.s8-panel:hover .s8-panel__overlay {  background: linear-gradient(    to top,    rgba(6, 10, 22, 0.97) 0%,    rgba(6, 10, 22, 0.65) 42%,    rgba(6, 10, 22, 0.18) 68%,    transparent 100%  );}
+/* =====================================================   레이어 3-A: 인덱스 번호 (z-index: 3)   ===================================================== */.s8-panel__index {  position: absolute;  top: 1.2rem;  left: 50%;  transform: translateX(-50%);  z-index: 3;             /* 텍스트 레이어 */
+  font-size: 0.65rem;  font-weight: 700;  letter-spacing: 0.2em;  color: rgba(255, 255, 255, 0.35);  white-space: nowrap;
+  transition: opacity 0.3s ease;}
+.s8-panel:hover .s8-panel__index {  opacity: 0;             /* 호버 시 숨김 */}
+/* =====================================================   레이어 3-B: 하단 텍스트 콘텐츠 (z-index: 3)   ===================================================== */.s8-panel__content {  position: absolute;  bottom: 0;  left: 0;  right: 0;  padding: 1.5rem 1.4rem 1.75rem;  z-index: 3;             /* 텍스트 레이어 */
+  display: flex;  flex-direction: column;  gap: 0.45rem;}
+/* -- 스타일 태그 뱃지 -- */.s8-panel__tag {  display: inline-block;  width: fit-content;  font-size: 0.6rem;  font-weight: 800;  letter-spacing: 0.14em;  text-transform: uppercase;  padding: 0.18rem 0.55rem;  border-radius: 999px;  background: linear-gradient(    90deg,    rgba(6, 182, 212, 0.2),    rgba(168, 85, 247, 0.2)  );  border: 1px solid rgba(6, 182, 212, 0.4);  color: var(--neon-cyan);
+  /* 기본: 숨김 */  opacity: 0;  transform: translateY(8px);  transition:    opacity  0.35s ease 0.12s,    transform 0.35s ease 0.12s;}
+.s8-panel:hover .s8-panel__tag {  opacity: 1;  transform: translateY(0);}
+/* -- 패널 제목 -- */.s8-panel__title {  font-size: 1.1rem;  font-weight: 700;  color: var(--text-base);  line-height: 1.2;  white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;
+  opacity: 0;  transform: translateY(10px);  transition:    opacity  0.35s ease 0.2s,    transform 0.35s ease 0.2s;}
+.s8-panel:hover .s8-panel__title {  opacity: 1;  transform: translateY(0);}
+/* -- 프롬프트 텍스트 래퍼 -- */.s8-panel__prompt-wrap {  opacity: 0;  transform: translateY(14px);  transition:    opacity  0.4s ease 0.28s,    transform 0.4s ease 0.28s;}
+.s8-panel:hover .s8-panel__prompt-wrap {  opacity: 1;  transform: translateY(0);}
+.s8-panel__prompt-label {  font-size: 0.58rem;  font-weight: 800;  letter-spacing: 0.2em;  color: var(--neon-purple);  margin-bottom: 0.3rem;}
+.s8-panel__prompt-text {  font-family: "JetBrains Mono", "Fira Code", monospace;  font-size: 0.71rem;  color: rgba(148, 163, 184, 0.8);  line-height: 1.68;  /* 3줄 초과 시 말줄임 */  display: -webkit-box;  -webkit-line-clamp: 3;  -webkit-box-orient: vertical;  overflow: hidden;}
+/* -- 패널 사이 구분선 -- */.s8-panel + .s8-panel {  border-left: 1px solid rgba(255, 255, 255, 0.05);}
+/* =====================================================   반응형: 모바일 (768px 이하)   세로 배치 + 높이 자동   ===================================================== */@media (max-width: 48rem) {  .s8-accordion {    flex-direction: column;    height: auto;  }
+  .s8-panel {    flex: none;    height: 180px;        /* 모바일에서 각 패널 고정 높이 */    min-width: unset;  }
+  /* 모바일: hover 효과 비활성 (터치 환경 고려) */  .s8-accordion:hover .s8-panel {    flex: none;  }
+  .s8-accordion .s8-panel:hover {    flex: none;    height: 320px;        /* 터치·호버 시 높이만 확장 */  }
+  .s8-panel + .s8-panel {    border-left: none;    border-top: 1px solid rgba(255, 255, 255, 0.05);  }}
+/* =====================================================   /섹션 8 끝   ===================================================== */
+
   </style>
 </head>
 
@@ -2113,6 +2177,302 @@
 </section>
 <!-- [섹션 5 끝] -->
 
+
+
+
+<!-- ============================================================
+     섹션 7: 자주 하는 실수 — 3D Flip Cards
+     삽입 위치: 섹션 6 </section> 바로 다음, <footer> 바로 위
+     ============================================================ -->
+<section class="flip-section">
+  <div class="flip-section__inner">
+
+    <div class="section-header">
+      <p class="section-eyebrow">Common Pitfalls</p>
+      <h2 class="section-title">
+        자주 하는 <span class="section-title--accent">실수</span>들
+      </h2>
+      <p class="section-desc">
+        카드 위에 마우스를 올려 실수의 해결책을 확인하세요.
+        작은 습관의 차이가 프롬프트 품질을 결정합니다.
+      </p>
+    </div>
+
+    <div class="flip-grid">
+
+      <!-- 카드 1 -->
+      <div class="flip-card">
+        <div class="flip-card__inner">
+
+          <!-- 앞면 -->
+          <div class="flip-card__face flip-card__face--front">
+            <div class="flip-card__mistake-badge">Mistake 01</div>
+            <div class="flip-card__front-icon">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__front-title">너무 모호한 지시</h3>
+            <p class="flip-card__front-desc">
+              "좋은 글 써줘", "코드 고쳐줘"처럼<br>
+              목적·대상·형식이 전혀 없는<br>
+              지시는 엉뚱한 결과를 냅니다.
+            </p>
+            <div class="flip-card__hint">뒤집어서 해결책 보기</div>
+          </div>
+
+          <!-- 뒷면 -->
+          <div class="flip-card__face flip-card__face--back">
+            <div class="flip-card__solution-badge">Solution</div>
+            <div class="flip-card__back-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__back-title">Context + Task 명시</h3>
+            <p class="flip-card__back-desc">
+              "마케터를 위한 SNS 캡션을<br>
+              인스타그램 스타일로, 150자 이내로<br>
+              3가지 버전으로 작성해 줘."
+            </p>
+            <code class="flip-card__code">Role + Goal + Format + Limit</code>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 카드 2 -->
+      <div class="flip-card">
+        <div class="flip-card__inner">
+
+          <div class="flip-card__face flip-card__face--front">
+            <div class="flip-card__mistake-badge">Mistake 02</div>
+            <div class="flip-card__front-icon">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__front-title">역할 부여 없음</h3>
+            <p class="flip-card__front-desc">
+              AI에게 '누구처럼' 행동할지<br>
+              알려주지 않으면 일반적이고<br>
+              밋밋한 답변만 돌아옵니다.
+            </p>
+            <div class="flip-card__hint">뒤집어서 해결책 보기</div>
+          </div>
+
+          <div class="flip-card__face flip-card__face--back">
+            <div class="flip-card__solution-badge">Solution</div>
+            <div class="flip-card__back-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__back-title">Persona 설정</h3>
+            <p class="flip-card__back-desc">
+              "당신은 10년 경력의 UX 라이터입니다.<br>
+              전환율 최적화 관점에서<br>
+              랜딩 페이지 카피를 작성해 주세요."
+            </p>
+            <code class="flip-card__code">Act as [Expert] with [Experience]</code>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 카드 3 -->
+      <div class="flip-card">
+        <div class="flip-card__inner">
+
+          <div class="flip-card__face flip-card__face--front">
+            <div class="flip-card__mistake-badge">Mistake 03</div>
+            <div class="flip-card__front-icon">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__front-title">출력 형식 미지정</h3>
+            <p class="flip-card__front-desc">
+              결과물의 형식(JSON, 표, 목록 등)을<br>
+              지정하지 않으면 매번<br>
+              다른 형태로 응답이 옵니다.
+            </p>
+            <div class="flip-card__hint">뒤집어서 해결책 보기</div>
+          </div>
+
+          <div class="flip-card__face flip-card__face--back">
+            <div class="flip-card__solution-badge">Solution</div>
+            <div class="flip-card__back-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__back-title">Format 명시</h3>
+            <p class="flip-card__back-desc">
+              "결과는 JSON 형식으로,<br>
+              title / summary / tags<br>
+              3개의 키만 포함해 주세요."
+            </p>
+            <code class="flip-card__code">Output: JSON / Markdown / Table</code>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 카드 4 -->
+      <div class="flip-card">
+        <div class="flip-card__inner">
+
+          <div class="flip-card__face flip-card__face--front">
+            <div class="flip-card__mistake-badge">Mistake 04</div>
+            <div class="flip-card__front-icon">
+              <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__front-title">한 번에 너무 많은 요청</h3>
+            <p class="flip-card__front-desc">
+              하나의 프롬프트에 10가지를<br>
+              한꺼번에 요청하면 AI가<br>
+              우선순위를 잃고 품질이 저하됩니다.
+            </p>
+            <div class="flip-card__hint">뒤집어서 해결책 보기</div>
+          </div>
+
+          <div class="flip-card__face flip-card__face--back">
+            <div class="flip-card__solution-badge">Solution</div>
+            <div class="flip-card__back-icon">
+              <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"/>
+              </svg>
+            </div>
+            <h3 class="flip-card__back-title">단계별 Chain 분리</h3>
+            <p class="flip-card__back-desc">
+              작업을 3~4단계로 쪼개어<br>
+              순서대로 요청하는<br>
+              Chain-of-Thought 전략을 사용하세요.
+            </p>
+            <code class="flip-card__code">Step 1 → Step 2 → Step 3</code>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /.flip-grid -->
+  </div>
+</section>
+<!-- ============================================================
+     /섹션 7 끝
+     ============================================================ -->
+
+
+<!-- =====================================================
+     섹션 8: 이미지 프롬프트 갤러리 (CSS Accordion)
+     삽입 위치: 섹션 7 </section> 다음, <footer> 바로 위
+     ===================================================== -->
+<section class="s8-gallery-section">
+
+  <!-- 섹션 헤더 -->
+  <div class="s8-header">
+    <span class="section-eyebrow">IMAGE PROMPTS</span>
+    <h2 class="section-title">
+      갤러리: 프롬프트가 만든
+      <span class="section-title--accent">비주얼</span>
+    </h2>
+    <p class="section-desc">
+      실제 이미지 생성 AI에 사용된 프롬프트와 그 결과물을 확인하세요.
+      패널에 마우스를 올려 프롬프트를 확인하세요.
+    </p>
+  </div>
+
+  <!-- 아코디언 컨테이너 -->
+  <div class="s8-accordion">
+
+    <!-- 패널 1 -->
+    <div class="s8-panel">
+      <!-- 레이어 1: 배경 이미지 -->
+      <div class="s8-panel__bg" style="background-image: url('https://picsum.photos/800/1200?random=1');"></div>
+      <!-- 레이어 2: 그라디언트 오버레이 -->
+      <div class="s8-panel__overlay"></div>
+      <!-- 레이어 3: 인덱스 번호 -->
+      <span class="s8-panel__index">01</span>
+      <!-- 레이어 3: 하단 텍스트 콘텐츠 -->
+      <div class="s8-panel__content">
+        <span class="s8-panel__tag">Cinematic</span>
+        <p class="s8-panel__title">Neon City Dusk</p>
+        <div class="s8-panel__prompt-wrap">
+          <p class="s8-panel__prompt-label">PROMPT</p>
+          <p class="s8-panel__prompt-text">
+            cinematic shot, neon-lit cyberpunk city at dusk, rain-soaked streets reflecting purple and cyan light, ultra-detailed, 8k, volumetric fog
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 패널 2 -->
+    <div class="s8-panel">
+      <div class="s8-panel__bg" style="background-image: url('https://picsum.photos/800/1200?random=2');"></div>
+      <div class="s8-panel__overlay"></div>
+      <span class="s8-panel__index">02</span>
+      <div class="s8-panel__content">
+        <span class="s8-panel__tag">Portrait</span>
+        <p class="s8-panel__title">AI Genesis</p>
+        <div class="s8-panel__prompt-wrap">
+          <p class="s8-panel__prompt-label">PROMPT</p>
+          <p class="s8-panel__prompt-text">
+            hyper-realistic portrait of an android, glowing circuit patterns on skin, soft studio lighting, shallow depth of field, photorealistic, 4k
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 패널 3 -->
+    <div class="s8-panel">
+      <div class="s8-panel__bg" style="background-image: url('https://picsum.photos/800/1200?random=3');"></div>
+      <div class="s8-panel__overlay"></div>
+      <span class="s8-panel__index">03</span>
+      <div class="s8-panel__content">
+        <span class="s8-panel__tag">Landscape</span>
+        <p class="s8-panel__title">Digital Horizon</p>
+        <div class="s8-panel__prompt-wrap">
+          <p class="s8-panel__prompt-label">PROMPT</p>
+          <p class="s8-panel__prompt-text">
+            vast alien landscape, towering crystalline mountains, twin moons rising, bioluminescent flora, matte painting style, epic scale, concept art
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 패널 4 -->
+    <div class="s8-panel">
+      <div class="s8-panel__bg" style="background-image: url('https://picsum.photos/800/1200?random=4');"></div>
+      <div class="s8-panel__overlay"></div>
+      <span class="s8-panel__index">04</span>
+      <div class="s8-panel__content">
+        <span class="s8-panel__tag">Abstract</span>
+        <p class="s8-panel__title">Neural Dreams</p>
+        <div class="s8-panel__prompt-wrap">
+          <p class="s8-panel__prompt-label">PROMPT</p>
+          <p class="s8-panel__prompt-text">
+            abstract neural network visualization, flowing data streams, deep purple and electric blue palette, macro lens, generative art, ultra-high detail
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.s8-accordion -->
+</section>
+<!-- ===================================================
+     /섹션 8 끝
+     =================================================== -->
 
 <!-- ============================================================
      [섹션 6] 실험실 합류 & 가상 터미널
