@@ -1399,7 +1399,7 @@
 /* -- 프롬프트 텍스트 래퍼 -- */.s8-panel__prompt-wrap {  opacity: 0;  transform: translateY(14px);  transition:    opacity  0.4s ease 0.28s,    transform 0.4s ease 0.28s;}
 .s8-panel:hover .s8-panel__prompt-wrap {  opacity: 1;  transform: translateY(0);}
 .s8-panel__prompt-label {  font-size: 0.58rem;  font-weight: 800;  letter-spacing: 0.2em;  color: var(--neon-purple);  margin-bottom: 0.3rem;}
-.s8-panel__prompt-text {  font-family: "JetBrains Mono", "Fira Code", monospace;  font-size: 0.71rem;  color: rgba(148, 163, 184, 0.8);  line-height: 1.68;  /* 3줄 초과 시 말줄임 */  display: -webkit-box;  -webkit-line-clamp: 3;  -webkit-box-orient: vertical;  overflow: hidden;}
+.s8-panel__prompt-text {  font-family: "JetBrains Mono", "Fira Code", monospace;  font-size: 0.71rem;  color: rgba(148, 163, 184, 0.8);  line-height: 1.68;  /* 3줄 초과 시 말줄임 */  display: -webkit-box; -webkit-box-orient: vertical;  overflow: hidden;}
 /* -- 패널 사이 구분선 -- */.s8-panel + .s8-panel {  border-left: 1px solid rgba(255, 255, 255, 0.05);}
 /* =====================================================   반응형: 모바일 (768px 이하)   세로 배치 + 높이 자동   ===================================================== */@media (max-width: 48rem) {  .s8-accordion {    flex-direction: column;    height: auto;  }
   .s8-panel {    flex: none;    height: 180px;        /* 모바일에서 각 패널 고정 높이 */    min-width: unset;  }
