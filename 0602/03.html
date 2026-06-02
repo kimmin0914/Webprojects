@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요소객체 속성 조작</title>
+ 
+    <script>
+        // textContent, innerHTML
+        window.onload = function(){
+            let img1 = document.getElementById("img1");
+ 
+            // img1.src = "https://placehold.co/300x200";
+            img1.src = "imgs/reze.webp";
+            img1.width = 1980;
+            img1.height = 1024;
+        }
+ 
+        function changeImage(btn) {
+            if(btn.innerText === "감바노 변경"){
+                img1.src = "imgs/skrrr.png";
+                btn.innerText = "레제 변경";
+            }
+            else{
+                img1.src = "imgs/reze.webp";
+                btn.innerText = "감바노 변경"
+            }
+            // let img1 = document.getElementById("img1");
+            // img1.src = "imgs/skrrr.png";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="changeImage(this)">이미지 변경하기</button>
+    <img id="img1">
+ 
+ 
+</body>
+</html>
