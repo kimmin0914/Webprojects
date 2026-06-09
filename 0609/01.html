@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인라인 이벤트 모델 1</title>
     <script>
+        window.onload = function() {
+            let a1 = document.getElementById("a1");
+            a1.onclick = function(event) {
+                // event.preventDefault();
+                return false;
+            }
+        }
         function greet() {
             alert('안녕하세요~ 인라인 이벤트 모델 2');
         }
@@ -15,41 +22,42 @@
  
         function overChange(btn) {
             btn.style.backgroundColor = "magenta";
-            btn.style.backgroundColor = "puple";
+            btn.style.color = "white";
         }
        
         function outChange(btn) {
             btn.style.backgroundColor = "sky";
-            btn.style.backgroundColor = "blue";
+            btn.style.color = "black";
         }
  
-        let count = 1;
+        let count1 = 1;
         function changeImg(img) {
-            count++;
-            if(count == 6){
-                count = 1;
+            count1++;
+            if(count1 == 6){
+                count1 = 1;
             }
-            img.src = "imgs/images" + count + ".jpg";
+            img.src = "imgs/images" + count1 + ".jpg";
         }
- 
+
+        let count2 = 1;
         setInterval(function() {
             let img = document.querySelectorAll("img")[1];
-            count++;
-            if(count == 6){
-                count = 1;
+            count2++;
+            if(count2 == 6){
+                count2 = 1;
             }
-            img.src = "imgs/images" + count + ".jpg";
+            img.src = "imgs/images" + count2 + ".jpg";
         }, 2000);
-
-       
+ 
     </script>
 </head>
-<body onload="showImageSlide()">
+<body>
     <button onclick="alert('인라인 이벤트 모델 1')">인라인 이벤트 모델 1</button><br><br>
     <button onclick="greet()">인라인 이벤트 모델 2</button><br><br>
     <button onclick="addStar(this)">별 추가</button><br><br>
     <button onmouseover="overChange(this)" onmouseout="outChange(this)">배경 및 글자색 변경</button><br><br>
     <img src="imgs/images1.jpg" width="400" height="300" onclick="changeImg(this)" style="cursor: pointer;"><br><br>
-    <img src="imgs/images1.jpg" width="400" hright="300">
+    <img src="imgs/images1.jpg" width="400" height="300">
+    <a href="https://www.naver.com/" id="a1">디폴트 이벤트 제거</a>
 </body>
 </html>
