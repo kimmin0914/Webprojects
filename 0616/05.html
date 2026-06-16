@@ -14,22 +14,27 @@
                     height : "100px",
                     background : "orange"
                 })
-
-                .on("click", function(){
-                    $(this).css("background", "red");
-                }).on("mouseenter", function(){
-                    $(this).css("background", "blue");
-                })
-                .on("mouseenter", function(){
-                    $(this).css("background", "blue");
-                }).on("mouseleave", function(){
-                    $(this).css("background", "orange");
+                .on({
+                    click: function(){
+                        $(this).css("background", "red");
+                    },
+                    mouseenter: function(){
+                        $(this).css("background", "blue");
+                    },
+                    mouseleave: function(){
+                        $(this).css("background", "orange");
+                    }
                 });
+                $("a").on("click", function(event){
+                    alert("링크가 클릭되었습니다.");
+                    event.preventDefault();
+                })
             }
         );
     </script>
 </head>
 <body>
     <div id="box"></div>
+    <a href="https://www.naver.com">Naver Homepage</a>
 </body>
 </html>
