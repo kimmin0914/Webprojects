@@ -13,17 +13,16 @@
                     width : "100px",
                     height : "100px",
                     background : "orange"
-                });
+                })
 
-                $("#box").on("click", function(){
+                .on("click", function(){
                     $(this).css("background", "red");
-                });
-
-                $("#box").on("mouseenter", function(){
+                }).on("mouseenter", function(){
                     $(this).css("background", "blue");
-                });
-
-                $("#box").on("mouseleave", function(){
+                })
+                .on("mouseenter", function(){
+                    $(this).css("background", "blue");
+                }).on("mouseleave", function(){
                     $(this).css("background", "orange");
                 });
             }
